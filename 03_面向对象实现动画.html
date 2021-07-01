@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <canvas width="600" height="600" id="can">
+    当前浏览器版本不支持,请升级浏览器
+  </canvas>
+  <script>
+    // 获取画布
+    var can = document.getElementById("can")
+    var ctx = can.getContext("2d");
+    // 绘制方法
+    function Rect(x, y, w, h, color) {
+      this.x = x;
+      this.y = y;
+      this.w = w;
+      this.h = h;
+      this.color = color
+    }
+    // 更新方法
+    Rect.prototype.update = function () {
+      this.x++;
+    }
+    // 渲染
+    Rect.prototype.render = function () {
+      // 设置颜色
+      ctx.fillStyle = this.color;
+      // 渲染
+      ctx.fillRect(this.x, this.y, this.w, this.h);
+    }
+    // 实例化
+    var r1 = new Rect(100, 100, 50, 50, "#91d5ff")
+    // 动画过程
+    setInterval(() => {
+      //清屏
+      ctx.clearRect(0, 0, can.width, can.height)
+      //更新
+      r1.update()
+      // 渲染
+      r1.render()
+    }, 5)
+  </script>
+</body>
+
+</html>
